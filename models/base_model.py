@@ -13,10 +13,12 @@ class BaseModel:
     Base class for other classes
     '''
 
-    def __init__(self, id=None, created_at=None, updated_at=None):
+    def __init__(self, name=None, my_number=None, id=None, created_at=None, updated_at=None):
         '''
         Initialize the BaseModel instance.
         '''
+        self.name = name
+        self.my_number = my_number
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = self.created_at
