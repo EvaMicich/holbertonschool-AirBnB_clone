@@ -4,7 +4,6 @@ Module that creates the class Basemodel and all
 common attributes/methods for other classes
 '''
 
-
 import uuid
 from datetime import datetime
 
