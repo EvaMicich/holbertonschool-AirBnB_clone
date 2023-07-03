@@ -14,7 +14,7 @@ class BaseModel:
     Base class for other classes
     '''
 
-    def __init__(self):
+    def __init__(self, id=None, created_at=None, updated_at=None):
         '''
         Initialize the BaseModel instance.
         '''
