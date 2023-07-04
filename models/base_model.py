@@ -13,16 +13,27 @@ class BaseModel:
     Base class for other classes
     '''
 
-    def __init__(self, name=None, my_number=None, id=None,
-                 created_at=None, updated_at=None):
+    def __init__(self, *args, **kwargs):
         '''
         Initialize the BaseModel instance.
         '''
-        self.name = name
-        self.my_number = my_number
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        if kwargs != {}:
+            for key, value in kwargs.items():
+                if key == 'id':
+                    self.id = value
+                elif key == 'name':
+                    self.name = value
+                elif key == 'my_number':
+                    self.my_number = value
+                elif key == 'created_at':
+                    self.created_at = datetime.now().fromisoformat(value)
+                elif key == 'updated_at':
+                    self.updated_at = datetime.now().fromisoformat(value)
+
+        else:
+                self.id = str(uuid.uuid4())
+                self.created_at = datetime.now()
+                self.updated_at = datetime.now()
 
     def __str__(self):
         '''
