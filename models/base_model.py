@@ -4,34 +4,20 @@ Base Class
 """
 import uuid
 import datetime
-import models
+
 
 
 class BaseModel:
     """
     BaseModel class
     """
-    def __init__(self, *args, **kwargs):
-        """
-        Initialisation
-        """
-        if kwargs != {}:
-            for key, value in kwargs.items():
-                if key == 'id':
-                    self.id = value
-                elif key == 'created_at':
-                    self.created_at = datetime.datetime.fromisoformat(value)
-                elif key == 'updated_at':
-                    self.updated_at = datetime.datetime.fromisoformat(value)
-                elif key == 'my_number':
-                    self.my_number = value
-                elif key == 'name':
-                    self.name = value
-        else:
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.datetime.now()
-            self.updated_at = datetime.datetime.now()
-            models.storage.new(self)
+    def __init__(self, id=None,
+                 created_at=None, updated_at=None):
+
+        self.id = str(uuid.uuid4())
+        self.created_at = datetime.datetime.now()
+        self.updated_at = datetime.datetime.now()
+
 
     def __str__(self):
         """
@@ -44,7 +30,7 @@ class BaseModel:
         Updates the attribute updated_at with the current datetime
         """
         self.updated_at = datetime.datetime.now()
-        models.storage.save()
+
 
     def to_dict(self):
         """
