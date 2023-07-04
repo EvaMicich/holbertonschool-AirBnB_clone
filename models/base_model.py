@@ -13,7 +13,8 @@ class BaseModel:
     Base class for other classes
     '''
 
-    def __init__(self, name=None, my_number=None, id=None, created_at=None, updated_at=None):
+    def __init__(self, name=None, my_number=None, id=None,
+                 created_at=None, updated_at=None):
         '''
         Initialize the BaseModel instance.
         '''
@@ -21,7 +22,7 @@ class BaseModel:
         self.my_number = my_number
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
-        self.updated_at = self.created_at
+        self.updated_at = datetime.now()
 
     def __str__(self):
         '''
@@ -40,7 +41,7 @@ class BaseModel:
         """
         Returns a dictionary containing all keys/values of the instance
         """
-        new_dict = self.__dict__
+        new_dict = self.__dict__.copy()
         new_dict["__class__"] = f"{self.__class__.__name__}"
         new_dict["created_at"] = new_dict["created_at"].isoformat()
         new_dict["updated_at"] = new_dict["updated_at"].isoformat()
