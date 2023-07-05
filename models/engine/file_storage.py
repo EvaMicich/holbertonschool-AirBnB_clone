@@ -2,9 +2,18 @@
 """
 Module for the file storage class
 """
-
-
 import json
+
+
+class BaseModelEncoder(json.JSONEncoder):
+    """
+    A json encoding tool to turn BaseModel ojects into dictionary,
+    as intermediate for a json.dump conversion
+    """
+    def default(self, obj):
+        if isinstance(obj, BaseModel):
+            return obj.to_dict()
+        return super().default(obj)
 
 
 class FileStorage():
@@ -31,21 +40,21 @@ class FileStorage():
         """
         Setting in new dict
         """
-        self.__objects[f"{type(obj).__name__}.{obj.id}"] = obj
+        self.__objects[f"{type(obj).__name__}.{obj.id}"] = obj.to_dict()
 
     def save(self):
         """
         serializes __objects to the JSON file
         """
         with open(self.__file_path, 'w') as serial_obj:
-            json.dump(self.__objects, serial_obj)
+            json.dump(self.__objects, serial_obj, cls=BaseModelEncoder)
 
     def reload(self):
         """
-        deserializes json to file
+        deserializes json file to __objects attribute
         """
         try:
-            with open(self.__file_path, encoding="utf-8") as obj_from_json:
-                return(json.load(obj_from_json))
+            with open(self.__file_path, 'r') as json_string:
+                self.__objects = json.load(json_string)
         except:
             pass
