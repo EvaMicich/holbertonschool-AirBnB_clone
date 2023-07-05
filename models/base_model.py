@@ -6,9 +6,8 @@ common attributes/methods for other classes
 
 import uuid
 from datetime import datetime
-from models.engine.file_storage import FileStorage
+from models import storage
 
-storage = FileStorage
 
 class BaseModel:
     """
