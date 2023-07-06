@@ -5,30 +5,16 @@ Module for the file storage class
 import json
 
 
-"""
-class BaseModelEncoder(json.JSONEncoder):
-
-    A json encoding tool to turn BaseModel ojects into dictionary,
-    as intermediate for a json.dump conversion
-    def default(self, obj):
-        if isinstance(obj, BaseModel):
-            return obj.to_dict()
-        return super().default(obj)
-"""
-
 class FileStorage():
     """
     Class called file storage
-
-    Arguments:
-    file_path: string - path to the JSON file (ex: file.json
-    objects: dictionary - empty but will store all objects by <class name>.id
     """
 
-    def __init__(self, file_path="", objects={}):
-        """initial file storage"""
-        self.__file_path = file_path
-        self.__objects = objects
+    """
+    Class attribute file storage
+    """
+    __file_path = "file.json"
+    __objects = {}
 
     def all(self):
         """
