@@ -43,8 +43,10 @@ class TestBaseModel(unittest.TestCase):
         self.assertIn(self.model.id, self.string_representation)
 
     def test_save_updates_updated_at(self):
+        old_updated_at = self.model.updated_at
         self.model.save()
-        self.assertNotEqual(self.initial_updated_at, self.model.updated_at)
+        new_updated_at = self.model.updated_at
+        self.assertNotEqual(old_updated_at, new_updated_at)
 
     def test_to_dict_returns_dict(self):
         self.assertIsInstance(self.model_dict, dict)
