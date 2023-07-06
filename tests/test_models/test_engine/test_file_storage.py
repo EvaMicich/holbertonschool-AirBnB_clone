@@ -75,4 +75,30 @@ class TestFileStorage(unittest.TestCase):
         obj2_dict = self.objects.get(f"BaseModel.{self.obj2.id}")
         obj2 = BaseModel(**obj2_dict)
         self.assertEqual(obj2.to_dict(), obj2_dict)
+        
+    def test_reload_restores_objects_from_file(self):
+        # Test reload() method restores objects from the file
+        # Modify the file contents
+        with open(self.storage._FileStorage__file_path, 'w') as file:
+            file.write(json.dumps({}))
+
+        # Verify that objects are empty after modifying the file
+        objects = self.storage.all()
+        self.assertEqual(len(objects), 0)
+
+        # Add objects and save the file
+        self.storage.new(self.obj1)
+        self.storage.new(self.obj2)
+        self.storage.save()
+
+        # Clear objects and reload from the file
+        self.storage.clear()
+        self.storage.reload()
+
+        # Verify that objects are restored from the file
+        objects = self.storage.all()
+        expected_keys = [f"BaseModel.{self.obj1.id}", f"BaseModel.{self.obj2.id}"]
+        for key in expected_keys:
+            self.assertIn(key, objects)
+
 
