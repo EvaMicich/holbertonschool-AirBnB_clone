@@ -8,10 +8,7 @@ import json
 class FileStorage():
     """
     Class called file storage
-    """
 
-    """
-    Class attribute file storage
     """
     __file_path = "file.json"
     __objects = {}
@@ -32,8 +29,9 @@ class FileStorage():
         """
         serializes __objects to the JSON file
         """
+
         with open(self.__file_path, 'w') as serial_obj:
-            json.dump(self.__objects, serial_obj)
+            json.dump(self.__objects, serial_obj, cls=BaseModelEncoder)
 
     def reload(self):
         """
