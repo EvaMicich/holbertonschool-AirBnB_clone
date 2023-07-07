@@ -18,18 +18,19 @@ class BaseModel:
         """
         Initialize the BaseModel instance.
         """
+        attributes_list = ["id", "name", "my_number"]
+        attributes_ignore_list = ["__class__"]
+        attributes_datetime_list = ["created_at", "updated_at"]
         if kwargs != {}:
             for key, value in kwargs.items():
-                if key == 'id':
-                    self.id = value
-                elif key == 'name':
-                    self.name = value
-                elif key == 'my_number':
-                    self.my_number = value
-                elif key == 'created_at':
-                    self.created_at = datetime.now().fromisoformat(value)
-                elif key == 'updated_at':
-                    self.updated_at = datetime.now().fromisoformat(value)
+                if key in attributes_ignore_list:
+                    continue
+                elif key in attributes_datetime_list:
+                    setattr(self, key, datetime.now().fromisoformat(value))
+                elif key in attributes_list:
+                    setattr(self, key, value)
+                else:
+                    raise ValueError(f"Unknown attribute {key} in class BaseModel")
 
         else:
             self.id = str(uuid.uuid4())
