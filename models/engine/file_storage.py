@@ -21,17 +21,22 @@ class FileStorage():
 
     def new(self, obj):
         """
-        COnverting object to dictionary of dictionaries
+        COnverting object to dictionary of id:obj
         """
-        self.__objects[f"{type(obj).__name__}.{obj.id}"] = obj.to_dict()
+        self.__objects[f"{type(obj).__name__}.{obj.id}"] = obj
 
     def save(self):
         """
         serializes __objects to the JSON file
         """
-
-        with open(self.__file_path, 'w') as serial_obj:
-            json.dump(self.__objects, serial_obj, cls=BaseModelEncoder)
+        new_dict = {}
+        for key in self.__objects:
+            new_dict[key] = self.__objects[key].to_dict()
+        try:
+            with open(self.__file_path, 'w') as serial_obj:
+                json.dump(new_dict, serial_obj)
+        except:
+            pass
 
     def reload(self):
         """
