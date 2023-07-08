@@ -51,8 +51,10 @@ class TestFileStorage(unittest.TestCase):
         self.assertIn(f"BaseModel.{self.obj2_id}", data)
 
     def test_reload_deserializes_file_to_objects(self):
-        self.assertIn(f"BaseModel.{self.obj1_id}", self.objects)
-        self.assertIn(f"BaseModel.{self.obj2_id}", self.objects)
+        reloaded_storage = FileStorage()
+        reloaded_storage.reload()
+        reloaded_objects = reloaded_storage.all()
+        self.assertEqual(reloaded_objects, self.objects)
 
     def test_reload_obj1_dict_matches_original(self):
         obj1_dict = self.objects[f"BaseModel.{self.obj1_id}"]
