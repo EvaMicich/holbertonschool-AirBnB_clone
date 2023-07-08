@@ -10,15 +10,33 @@ class HBNBCommand(cmd.Cmd):
     """command line interpreter, entry point"""
     prompt = '(hbnb)'
 
-    def do_create(self, arg):
-        if len(arg) == 0:
+    class_dict = {"BaseModel": BaseModel}
+
+    def do_create(self, *args):
+        'Creates instance of class: create BaseModel'
+        if len(*args) == 0:
             print("** class name missing **")
-        elif arg != "BaseModel":
+        elif args[0] not in self.class_dict.keys():
             print("** class doesn't exist **")
         else:
-            my_model = BaseModel()
+            my_model = self.class_dict[args[0]]()
             my_model.save()
             print(my_model.id)
+
+    def do_show(self, *args):
+        'Prints the string representation of an instance based\
+ on the class name and id: show BaseModel 1234-1234-1234'
+        if len(*args) == 0:
+            print("** class name missing **")
+        elif args[0] not in self.class_dict.keys():
+            print("** class doesn't exist **")
+#        else:
+#            try:
+#                my_dummy = self.class_dict[args[0]]()
+#                FileStorage.reload()
+#            my_model = self.class_dict[args[0]]()
+#            my_model.save()
+#            print(my_model.id)
 
     def do_quit(self, arg):
         'Quit command to exit the program'
