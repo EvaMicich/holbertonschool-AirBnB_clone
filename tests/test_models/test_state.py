@@ -10,5 +10,5 @@ class TestState(unittest.TestCase):
     def setUp(self):
         self.s = State()
 
-    def test_if_name_is_empty_string(self)
+    def test_if_name_is_empty_string(self):
         self.assertEqual(self.s.name, "")
