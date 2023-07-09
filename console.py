@@ -2,7 +2,8 @@
 """
 consol model, entry point for the consol
 """
-import cmd, sys
+import cmd
+import sys
 from models import storage
 from models.base_model import BaseModel
 from models.amenity import Amenity
@@ -54,7 +55,7 @@ class HBNBCommand(cmd.Cmd):
             current_dict = storage.all()
             try:
                 print(current_dict[key])
-            except:
+            except Exception:
                 print("** no instance found **")
 
     def do_destroy(self, *args):
@@ -73,7 +74,7 @@ class HBNBCommand(cmd.Cmd):
             try:
                 del current_dict[key]
                 storage.save()
-            except:
+            except Exception:
                 print("** no instance found **")
 
     def do_all(self, *args):
@@ -120,7 +121,7 @@ class HBNBCommand(cmd.Cmd):
             try:
                 key = f"{args_list[0]}.{args_list[1]}"
                 instance = current_dict[key]
-            except:
+            except Exception:
                 print("** no instance found **")
                 return
             setattr(instance, attr_name, attr_value)
@@ -136,6 +137,7 @@ class HBNBCommand(cmd.Cmd):
 
     def emptyline(self):
         pass
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
