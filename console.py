@@ -45,22 +45,24 @@ class HBNBCommand(cmd.Cmd):
             except:
                 print("** no instance found **")
 
-    def do_test(self, *args):
+    def do_destroy(self, *args):
+        'Deletes an instance based on the class name and id: destroy\
+BaseModel 1234-1234-1234'
         args_list = args[0].split()
-        print(args_list)
-        print(len(args_list))
-
-        if len(*args) == 0:
+        if len(args_list) == 0:
             print("** class name missing **")
-        elif args[0] not in self.class_dict.keys():
+        elif args_list[0] not in self.class_dict.keys():
             print("** class doesn't exist **")
-#        else:
-#            try:
-#                my_dummy = self.class_dict[args[0]]()
-#                FileStorage.reload()
-#            my_model = self.class_dict[args[0]]()
-#            my_model.save()
-#            print(my_model.id)
+        elif len(args_list) < 2:
+            print(f"len arg list {len(args_list)}** instance id missing **")
+        else:
+            key = f"{args_list[0]}.{args_list[1]}"
+            current_dict = storage.all()
+            try:
+                del current_dict[key]
+                storage.save()
+            except:
+                print("** no instance found **")
 
     def do_quit(self, arg):
         'Quit command to exit the program'
