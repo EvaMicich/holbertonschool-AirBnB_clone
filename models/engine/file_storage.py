@@ -5,7 +5,6 @@ Module for the file storage class
 import json
 
 
-
 class FileStorage():
     """
     Class called file storage
@@ -36,7 +35,7 @@ class FileStorage():
         try:
             with open(self.__file_path, 'w') as serial_obj:
                 json.dump(new_dict, serial_obj)
-        except:
+        except Exception:
             pass
 
     def reload(self):
@@ -60,16 +59,17 @@ class FileStorage():
             "Amenity": Amenity,
             "Review": Review
         }
-        dict_objects  = {}
+        dict_objects = {}
         try:
             with open(self.__file_path, 'r') as json_string:
                 dict_objects = json.load(json_string)
-        except:
-            dict_objects  = {}
+        except Exception:
+            dict_objects = {}
             pass
         for key, dict_object in dict_objects.items():
             current_obj_class = dict_object["__class__"]
             if current_obj_class in dict_classes:
-                self.__objects[key] = dict_classes[current_obj_class](**dict_object)
+                self.__objects[key] = dict_classes[current_obj_class](
+                    **dict_object)
             else:
                 raise TypeError(f'unknown class: {current_obj_class}')
