@@ -36,7 +36,7 @@ class HBNBCommand(cmd.Cmd):
         elif args_list[0] not in self.class_dict.keys():
             print("** class doesn't exist **")
         elif len(args_list) < 2:
-            print(f"len arg list {len(args_list)}** instance id missing **")
+            print(f"** instance id missing **")
         else:
             key = f"{args_list[0]}.{args_list[1]}"
             current_dict = storage.all()
@@ -54,7 +54,7 @@ BaseModel 1234-1234-1234'
         elif args_list[0] not in self.class_dict.keys():
             print("** class doesn't exist **")
         elif len(args_list) < 2:
-            print(f"len arg list {len(args_list)}** instance id missing **")
+            print(f"** instance id missing **")
         else:
             key = f"{args_list[0]}.{args_list[1]}"
             current_dict = storage.all()
@@ -63,6 +63,26 @@ BaseModel 1234-1234-1234'
                 storage.save()
             except:
                 print("** no instance found **")
+
+    def do_all(self, *args):
+        'Prints all string representation of all instances\
+based or not on the class name: all BaseModel or all'
+        args_list = args[0].split()
+        class = args_list[0]
+        current_dict_dict = storage.all()
+        print_list = []
+        if len(args_list) == 0:
+            for dict in current_dict_dict.items():
+                for key, value in dict.items():
+                    print_list.append(value)
+                    print(print_list)
+#        if class not in class_dict.keys():
+ #           print("** class doesn't exist **")
+  #      else:
+   #         for dict in current_dict_dict.items():
+    #            for key, value in dict.items():
+     #               if value[__class__] == class:
+      #                  print_list.append(value)
 
     def do_quit(self, arg):
         'Quit command to exit the program'
