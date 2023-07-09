@@ -31,7 +31,7 @@ class BaseModel:
                     setattr(self, key, value)
                 else:
                     raise ValueError(f"Unknown attribute {key}
-                    in class BaseModel")
+                                       in class BaseModel")
 
         else:
             self.id = str(uuid.uuid4())
