@@ -67,20 +67,12 @@ class TestFileStorage(unittest.TestCase):
 
 
     def test_reload(self):
-        # Save the initial state of the objects
         initial_objects = self.objects
-        
-        # Modify the objects
         self.obj1.name = 'modified_test1'
         self.obj1.save()
-        
         self.obj2.name = 'modified_test2'
         self.obj2.save()
-        
-        # Reload the storage and get the reloaded objects
         self.storage.reload()
         reloaded_objects = self.storage.all()
-        
-        # Verify that the reloaded objects match the initial objects
         for key in initial_objects:
             self.assertEqual(reloaded_objects.get(key).to_dict(), initial_objects.get(key).to_dict())
