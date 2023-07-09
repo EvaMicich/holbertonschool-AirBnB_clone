@@ -68,21 +68,24 @@ BaseModel 1234-1234-1234'
         'Prints all string representation of all instances\
 based or not on the class name: all BaseModel or all'
         args_list = args[0].split()
-        class = args_list[0]
-        current_dict_dict = storage.all()
+        current_dict = storage.all()
         print_list = []
         if len(args_list) == 0:
-            for dict in current_dict_dict.items():
-                for key, value in dict.items():
-                    print_list.append(value)
-                    print(print_list)
-#        if class not in class_dict.keys():
- #           print("** class doesn't exist **")
-  #      else:
-   #         for dict in current_dict_dict.items():
-    #            for key, value in dict.items():
-     #               if value[__class__] == class:
-      #                  print_list.append(value)
+            for obj_tuple in current_dict.items():
+                print_list.append(obj_tuple[1].__str__())
+            print(print_list)
+            return
+        class_name = args_list[0]
+        if class_name not in self.class_dict.keys():
+            print("** class doesn't exist **")
+        else:
+            for obj_tuple in current_dict.items():
+                instance = obj_tuple[1]
+                instance_class = str(instance.__class__.__name__)
+                if instance_class == class_name:
+                    print_list.append(instance.__str__())
+            print(print_list)
+
 
     def do_quit(self, arg):
         'Quit command to exit the program'
