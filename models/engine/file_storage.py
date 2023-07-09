@@ -5,6 +5,7 @@ Module for the file storage class
 import json
 
 
+
 class FileStorage():
     """
     Class called file storage
@@ -43,8 +44,21 @@ class FileStorage():
         deserializes json file to __objects attribute
         """
         from models.base_model import BaseModel
+        from models.user import User
+        from models.state import State
+        from models.place import Place
+        from models.city import City
+        from models.amenity import Amenity
+        from models.review import Review
+
         dict_classes = {
             "BaseModel": BaseModel,
+            "User": User,
+            "Place": Place,
+            "State": State,
+            "City": City,
+            "Amenity": Amenity,
+            "Review": Review
         }
         dict_objects  = {}
         try:

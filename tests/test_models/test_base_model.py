@@ -8,7 +8,7 @@ Unittest for BaseModel()
 import unittest
 from datetime import datetime
 from models.base_model import BaseModel
-
+from models.engine.file_storage import FileStorage
 
 class TestBaseModel(unittest.TestCase):
 
@@ -23,6 +23,9 @@ class TestBaseModel(unittest.TestCase):
         self.string_representation = str(self.model)
         self.initial_updated_at = self.model.updated_at
         self.model_dict = self.model.to_dict()
+        self.b1 = BaseModel()
+        self.f1 = FileStorage()
+        self.f1.new(self.b1)
 
     def test_init_with_args(self):
         self.assertEqual(self.model.id, '123')
