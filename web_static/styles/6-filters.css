@@ -38,8 +38,7 @@ button:hover {
 }
 
 .filters h2 {
-  font-weight: 600;
-  /* padding-top: 1rem; */
+  font-size: 16px;
   padding-left: 0rem;
 }
 
@@ -75,16 +74,13 @@ button:hover {
   padding-bottom: 2rem;
   transform: translateY(18px);
 }
+
 .city {
   padding-left: 1.5rem;
 }
 
 .locations .popover>li {
-  
-  padding-bottom: 1rem;
-}
-.locations .popover li ul li li {
-  background-color: green;
+
   padding-bottom: 1rem;
 }
 
