@@ -55,11 +55,10 @@ button:hover {
   padding-left: 2rem;
 }
 
-.filters li {}
-
 .locations:hover .popover {
   display: block;
 }
+
 .amenities:hover .popover {
   display: block;
 }
