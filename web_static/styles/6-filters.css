@@ -68,11 +68,11 @@ button:hover {
   background-color: #FAFAFA;
   border: 1px solid #DDDDDD;
   width: 25%;
-  z-index: -1;
   padding-left: 2rem;
   padding-top: 2rem;
   padding-bottom: 2rem;
-  transform: translateY(18px);
+  transform: translateY(17px);
+  z-index: 1;
 }
 
 .city {
@@ -80,7 +80,6 @@ button:hover {
 }
 
 .locations .popover>li {
-
   padding-bottom: 1rem;
 }
 
